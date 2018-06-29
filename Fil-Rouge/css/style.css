@@ -216,22 +216,20 @@ h6 {
 
 #page_content .right_section{
 	width:735px;
-	float:right;
 }
 
 #page_content .right_section .top_content{
 	padding:15px 0 0px 0;
 }
 
+
 #page_content .right_section .top_content .column_one{
 	width:300px;
-	float:left;
 	margin-bottom:20px;
 }
 
 #page_content .right_section .top_content .column_two{
 	width:300px;
-	float:right;
 	margin-bottom:20px;
 }
 
