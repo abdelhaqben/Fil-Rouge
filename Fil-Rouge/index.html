@@ -1,313 +1,335 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><title>Template 1</title>
-<meta name="description" content="A description of your website">
-<meta name="keywords" content="keyword1, keyword2, keyword3">
-<link href="css/style.css" rel="stylesheet" type="text/css">
-<link href="css/vis.css" rel="stylesheet" type="text/css">
- <script type="text/javascript" src="js/vis.js"></script>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Template 1</title>
+    <meta name="description" content="A description of your website">
+    <meta name="keywords" content="keyword1, keyword2, keyword3">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/vis.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/vis.js"></script>
 
-<style>
-.btn {
-    background-color: grey;
-    border: none;
-    color: white;
-    padding: 12px 16px;
-    margin-bottom: 20px;
-    width: 130px;
-    font-size: 16px;
-    cursor: pointer;
-}
+    <style>
+        .btn {
+            background-color: grey;
+            border: none;
+            color: white;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            width: 130px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        /* Darker background on mouse-over */
 
-/* Darker background on mouse-over */
-.btn:hover {
-    background-color: orange;
-}
-            #viz {
-                width: 700px;
-                height: 700px;
-                border: 1px solid lightgray;
-                font: 22pt arial;
-            }
+        .btn:hover {
+            background-color: orange;
+        }
 
-                        #network {
-                float:left;
-                width: 600px;
-                height: 600px;
-                margin:5px;
-                border: 1px solid lightgray;
-            }
-            #config {
-                float:left;
-                width: 400px;
-                height: 600px;
-            }
-            #input_output {
-                
-                height: 10%;
-                width: 15%;
-            }
+        #viz {
+            width: 700px;
+            height: 700px;
+            border: 1px solid lightgray;
+            font: 22pt arial;
+        }
 
-            p {
-                font-size:16px;
-                max-width:700px;
-            }
-</style>
+        #network {
+            float: left;
+            width: 600px;
+            height: 600px;
+            margin: 5px;
+            border: 1px solid lightgray;
+        }
+
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+
+        #input_output {
+
+            height: 10%;
+            width: 15%;
+        }
+
+        p {
+            font-size: 16px;
+            max-width: 700px;
+        }
+    </style>
 </head>
+
 <body>
 
-<div id="wrapper"> 
+    <div id="wrapper">
 
-  <div id="header"> 
+        <div id="header">
 
-    <div class="top_banner">
-      <h1>Fil Rouge</h1>
-    </div>
- 
-  </div>
+            <div class="top_banner">
+                <h1>Fil Rouge</h1>
+            </div>
 
-  <div id="page_content">
-  
-<!--Template designed by--><a href="http://www.htmltemplates.net"><img src="images/copyright.gif" class="copyright" alt="http://www.htmltemplates.net"></a>
-    
-	<div class="navigation">
-      <ul>
-        <li><a href="javascript:void(0)" id="dlbtn"> Save Topology</a></li>
-        <li><a href="#">Load Topology</a></li>
-        <li><a href="#">Configure Topology</a></li>
-      </ul>
-    </div>
-    	<div class="navigation">
-      <ul>
-        <li><a href="#">Source</a></li>
-        <li><a href="#">GUI</a></li>
-      </ul>
-    </div>
-
-
-    
-      <h1>Network Topology</h1>
-<!--// nouveau code// -->
-                <div id="network"></div>
-<div class="right_section">
-        <div>
-            <textarea id=input_output></textarea>
-            <input type="button" id="import_button" onclick="importNetwork()" value="import"></input>
-            <input type="button" id="export_button" onclick="exportNetwork()" value="export"></input>
-            <input type="button" id="destroy_button" onclick="destroyNetwork()" value="destroy"></input>
         </div>
 
-        <script type="text/javascript">
-            var network;
-            var container;
-            var exportArea;
-            var importButton;
-            var exportButton;
+        <div id="page_content">
 
-            function init() {
-                container = document.getElementById('network');
-                exportArea = document.getElementById('input_output');
-                importButton = document.getElementById('import_button');
-                exportButton = document.getElementById('export_button');
+            <!--Template designed by--><a href="http://www.htmltemplates.net"><img src="images/copyright.gif" class="copyright" alt="http://www.htmltemplates.net"></a>
 
-                draw();
-            }
+            <div class="navigation">
+                <ul>
+                    <li><a href="javascript:void(0)" id="dlbtn"> Save Topology</a></li>
+                    <li><a href="#">Load Topology</a></li>
+                    <li><a href="#">Configure Topology</a></li>
+                                        <input type="button" id="Save" onclick="f1()" value="test"/>
 
-            function addConnections(elem, index) {
-                // need to replace this with a tree of the network, then get child direct children of the element
-                elem.connections = network.getConnectedNodes(index);
-            }
+                </ul>
+            </div>
+            <div class="navigation">
+                <ul>
+                    <li><a href="#">Source</a></li>
+                    <li><a href="#">GUI</a></li>
+                </ul>
+            </div>
 
-            function destroyNetwork() {
-                network.destroy();
-            }
 
-            function clearOutputArea() {
-                exportArea.value = "";
-            }
 
-            function draw() {
-                // create a network of nodes
-                var data = getScaleFreeNetwork(5);
+            <h1>Network Topology</h1>
+            <!--// nouveau code// -->
+            <div id="network"></div>
+            <div class="right_section">
 
-                network = new vis.Network(container, data, {manipulation:{enabled:true}});
-
-                clearOutputArea();
-            }
-
-            function exportNetwork() {
-                clearOutputArea();
-
-                var nodes = objectToArray(network.getPositions());
-
-                nodes.forEach(addConnections);
-
-                // pretty print node data
-                var exportValue = JSON.stringify(nodes, undefined, 2);
-
-                exportArea.value = exportValue;
-                resizeExportArea();
-                var variable = JSON.stringify(nodes, undefined, 2);
-              setTimeout("create(variable, 'graph.json', 'text/plain')");
-            }
-
-            //fonction save
-
-             setTimeout (function create(text, name, type) {
-                var dlbtn = document.getElementById("dlbtn");
-                var file = new Blob([text], {type: type});
-                dlbtn.href = URL.createObjectURL(file);
-                dlbtn.download = name;
-                                                });
-
-            function importNetwork() {
-                var inputValue = exportArea.value;
-                var inputData = JSON.parse(inputValue);
-                var data = {
-                    nodes: getNodeData(inputData),
-                    edges: getEdgeData(inputData)
-                }
-
-                network = new vis.Network(container, data, {});
-                 
-
-                resizeExportArea();
-            }
-
-            function getNodeData(data) {
-                var networkNodes = [];
-
-                data.forEach(function(elem, index, array) {
-                    networkNodes.push({id: elem.id, label: elem.id, x: elem.x, y: elem.y});
-                });
-
-                return new vis.DataSet(networkNodes);
-            }
-
-            function getNodeById(data, id) {
-                for (var n = 0; n < data.length; n++) {
-                    if (data[n].id == id) {  // double equals since id can be numeric or string
-                      return data[n];
+                <script type="text/javascript">
+                    window.onload = function () {
+                        document.getElementById("Save").onclick = function fun() {
+                            var Url = "localhost/xml/get";
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('GET', Url, true);
+                            xhr.send();
+                            xhr.onreadystatechange = processRequest;
+                            function processRequest(e) {
+                                if (xhr.readyState == 4 && xhr.status == 200) {
+                                    // alert(xhr.responseText);
+                                    var response1 = JSON.parse(xhr.responseText);
+                                    document.getElementById("x").innerHTML = response1.x;
+                                    document.getElementById("y").innerHTML = response1.y;
+                                    document.getElementById("id").innerHTML = response1.id;
+                                    document.getElementById("connections").innerHTML = response1.connections;
+                                }
+                            }
+                        }
                     }
-                };
+                    var network;
+                    var container;
+                    var exportArea;
+                    var importButton;
+                    var exportButton;
 
-                throw 'Can not find id \'' + id + '\' in data';
-            }
+                    function init() {
+                        container = document.getElementById('network');
+                        exportArea = document.getElementById('input_output');
+                        importButton = document.getElementById('import_button');
+                        exportButton = document.getElementById('export_button');
 
-            function getEdgeData(data) {
-                var networkEdges = [];
+                        draw();
+                    }
 
-                data.forEach(function(node) {
-                    // add the connection
-                    node.connections.forEach(function(connId, cIndex, conns) {
-                        networkEdges.push({from: node.id, to: connId});
-                        let cNode = getNodeById(data, connId);
+                    function addConnections(elem, index) {
+                        // need to replace this with a tree of the network, then get child direct children of the element
+                        elem.connections = network.getConnectedNodes(index);
+                    }
 
-                        var elementConnections = cNode.connections;
+                    function destroyNetwork() {
+                        network.destroy();
+                    }
 
-                        // remove the connection from the other node to prevent duplicate connections
-                        var duplicateIndex = elementConnections.findIndex(function(connection) {
-                          return connection == node.id; // double equals since id can be numeric or string
+                    function clearOutputArea() {
+                        exportArea.value = "";
+                    }
+
+                    function draw() {
+                        // create a network of nodes
+                        var data = getScaleFreeNetwork(5);
+
+                        network = new vis.Network(container, data, { manipulation: { enabled: true } });
+
+                        clearOutputArea();
+                    }
+
+                    function exportNetwork() {
+                        clearOutputArea();
+
+                        var nodes = objectToArray(network.getPositions());
+
+                        nodes.forEach(addConnections);
+
+                        // pretty print node data
+                        var exportValue = JSON.stringify(nodes, undefined, 2);
+
+                        exportArea.value = exportValue;
+                        resizeExportArea();
+                        var variable = JSON.stringify(nodes, undefined, 2);
+                        setTimeout("create(variable, 'graph.json', 'text/plain')");
+                    }
+
+                    //fonction save
+
+                    setTimeout(function create(text, name, type) {
+                        var dlbtn = document.getElementById("dlbtn");
+                        var file = new Blob([text], { type: type });
+                        dlbtn.href = URL.createObjectURL(file);
+                        dlbtn.download = name;
+                    });
+
+                    function importNetwork() {
+                        var inputValue = exportArea.value;
+                        var inputData = JSON.parse(inputValue);
+                        var data = {
+                            nodes: getNodeData(inputData),
+                            edges: getEdgeData(inputData)
+                        }
+
+                        network = new vis.Network(container, data, {});
+
+
+                        resizeExportArea();
+                    }
+
+                    function getNodeData(data) {
+                        var networkNodes = [];
+
+                        data.forEach(function (elem, index, array) {
+                            networkNodes.push({ id: elem.id, label: elem.id, x: elem.x, y: elem.y });
                         });
 
+                        return new vis.DataSet(networkNodes);
+                    }
 
-                        if (duplicateIndex != -1) {
-                          elementConnections.splice(duplicateIndex, 1);
+                    function getNodeById(data, id) {
+                        for (var n = 0; n < data.length; n++) {
+                            if (data[n].id == id) {  // double equals since id can be numeric or string
+                                return data[n];
+                            }
                         };
-                  });
-                });
 
-                return new vis.DataSet(networkEdges);
-            }
+                        throw 'Can not find id \'' + id + '\' in data';
+                    }
 
-            function objectToArray(obj) {
-                return Object.keys(obj).map(function (key) {
-                  obj[key].id = key;
-                  return obj[key];
-                });
-            }
+                    function getEdgeData(data) {
+                        var networkEdges = [];
 
-            function resizeExportArea() {
-                exportArea.style.height = (1 + exportArea.scrollHeight) + "px";
-            }
+                        data.forEach(function (node) {
+                            // add the connection
+                            node.connections.forEach(function (connId, cIndex, conns) {
+                                networkEdges.push({ from: node.id, to: connId });
+                                let cNode = getNodeById(data, connId);
 
-            // fonction ajouter 
+                                var elementConnections = cNode.connections;
 
-            function getScaleFreeNetwork(nodeCount) {
-  var nodes = [];
-  var edges = [];
-  var connectionCount = [];
-
-  // randomly create some nodes and edges
-  for (var i = 0; i < nodeCount; i++) {
-    nodes.push({
-      id: i,
-      label: String(i)
-    });
-
-    connectionCount[i] = 0;
-
-    // create edges in a scale-free-network way
-    if (i == 1) {
-      var from = i;
-      var to = 0;
-      edges.push({
-        from: from,
-        to: to
-      });
-      connectionCount[from]++;
-      connectionCount[to]++;
-    }
-    else if (i > 1) {
-      var conn = edges.length * 2;
-      var rand = Math.floor(Math.random() * conn);
-      var cum = 0;
-      var j = 0;
-      while (j < connectionCount.length && cum < rand) {
-        cum += connectionCount[j];
-        j++;
-      }
+                                // remove the connection from the other node to prevent duplicate connections
+                                var duplicateIndex = elementConnections.findIndex(function (connection) {
+                                    return connection == node.id; // double equals since id can be numeric or string
+                                });
 
 
-      var from = i;
-      var to = j;
-      edges.push({
-        from: from,
-        to: to
-      });
-      connectionCount[from]++;
-      connectionCount[to]++;
-    }
-  }
+                                if (duplicateIndex != -1) {
+                                    elementConnections.splice(duplicateIndex, 1);
+                                };
+                            });
+                        });
 
-  return {nodes:nodes, edges:edges};
-}
+                        return new vis.DataSet(networkEdges);
+                    }
 
-var randomSeed = 764; // Math.round(Math.random()*1000);
-function seededRandom() {
-  var x = Math.sin(randomSeed++) * 10000;
-  return x - Math.floor(x);
-}
+                    function objectToArray(obj) {
+                        return Object.keys(obj).map(function (key) {
+                            obj[key].id = key;
+                            return obj[key];
+                        });
+                    }
 
-            init();
-        </script>
+                    function resizeExportArea() {
+                        exportArea.style.height = (1 + exportArea.scrollHeight) + "px";
+                    }
 
-<!--fin nouveau code-->
+                    // fonction ajouter 
 
-      
+                    function getScaleFreeNetwork(nodeCount) {
+                        var nodes = [];
+                        var edges = [];
+                        var connectionCount = [];
+
+                        // randomly create some nodes and edges
+                        for (var i = 0; i < nodeCount; i++) {
+                            nodes.push({
+                                id: i,
+                                label: String(i)
+                            });
+
+                            connectionCount[i] = 0;
+
+                            // create edges in a scale-free-network way
+                            if (i == 1) {
+                                var from = i;
+                                var to = 0;
+                                edges.push({
+                                    from: from,
+                                    to: to
+                                });
+                                connectionCount[from]++;
+                                connectionCount[to]++;
+                            }
+                            else if (i > 1) {
+                                var conn = edges.length * 2;
+                                var rand = Math.floor(Math.random() * conn);
+                                var cum = 0;
+                                var j = 0;
+                                while (j < connectionCount.length && cum < rand) {
+                                    cum += connectionCount[j];
+                                    j++;
+                                }
+
+
+                                var from = i;
+                                var to = j;
+                                edges.push({
+                                    from: from,
+                                    to: to
+                                });
+                                connectionCount[from]++;
+                                connectionCount[to]++;
+                            }
+                        }
+
+                        return { nodes: nodes, edges: edges };
+                    }
+
+                    var randomSeed = 764; // Math.round(Math.random()*1000);
+                    function seededRandom() {
+                        var x = Math.sin(randomSeed++) * 10000;
+                        return x - Math.floor(x);
+                    }
+
+                    init();
+                </script>
+
+                <!--fin nouveau code-->
+
+
+            </div>
+
+
+            <!--start footer from here-->
+            <div id="footer">Copyright &copy; 2014. Design by <a href="http://www.htmltemplates.net" target="_blank">htmltemplates.net</a><br>
+
+            </div>
+
+        </div>
+
     </div>
-
-    
-    <!--start footer from here-->
-    <div id="footer">Copyright &copy; 2014. Design by <a href="http://www.htmltemplates.net" target="_blank">htmltemplates.net</a><br>
-    
-    </div>
-	
-  </div>
-
-</div>
 
 </body>
+
 </html>
